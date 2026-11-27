@@ -1,0 +1,103 @@
+{
+  "started_at_utc": "2026-11-26T12:52:15.550151+00:00",
+  "scenario": "load",
+  "party_size": 2,
+  "concurrency": 10,
+  "buyers_per_event": 10,
+  "poll_timeout_seconds": 85,
+  "results": [
+    {
+      "event": "load-correct-20261126-065157",
+      "mode": "correct",
+      "hold_attempts": 10,
+      "successful_holds": 9,
+      "checkout_attempts": 9,
+      "accepted_checkouts": 9,
+      "orders_observed": {
+        "confirmed": 8,
+        "failed": 1,
+        "unresolved": 0,
+        "failure_reasons": {
+          "hold_expired": 1
+        }
+      },
+      "http_errors": {
+        "hold:409:seats_taken": 1
+      },
+      "latency_ms": {
+        "hold": {
+          "requests": 10,
+          "p50": 3468.0,
+          "p95": 3719.0
+        },
+        "checkout": {
+          "requests": 9,
+          "p50": 360.0,
+          "p95": 3609.0
+        }
+      },
+      "stats": {
+        "event_id": "load-correct-20261126-065157",
+        "capacity": 50,
+        "available": 34,
+        "held": 0,
+        "sold": 16,
+        "tickets_issued": 16,
+        "double_booked_seats": [],
+        "conflicts": 7,
+        "orders": {
+          "pending": 0,
+          "confirmed": 8,
+          "failed": 1
+        }
+      },
+      "elapsed_seconds": 67.83
+    },
+    {
+      "event": "load-naive-20261126-065157",
+      "mode": "naive",
+      "hold_attempts": 10,
+      "successful_holds": 10,
+      "checkout_attempts": 10,
+      "accepted_checkouts": 4,
+      "orders_observed": {
+        "confirmed": 4,
+        "failed": 0,
+        "unresolved": 0,
+        "failure_reasons": {}
+      },
+      "http_errors": {
+        "checkout:404:hold_not_found": 6
+      },
+      "latency_ms": {
+        "hold": {
+          "requests": 10,
+          "p50": 359.0,
+          "p95": 422.0
+        },
+        "checkout": {
+          "requests": 10,
+          "p50": 281.0,
+          "p95": 500.0
+        }
+      },
+      "stats": {
+        "event_id": "load-naive-20261126-065157",
+        "capacity": 50,
+        "available": 43,
+        "held": 0,
+        "sold": 7,
+        "tickets_issued": 7,
+        "double_booked_seats": [],
+        "conflicts": 0,
+        "orders": {
+          "pending": 0,
+          "confirmed": 4,
+          "failed": 0
+        }
+      },
+      "elapsed_seconds": 3.59
+    }
+  ],
+  "verdict": "OBSERVED: neither mode reported double-booked seats under this workload."
+}

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>310 Ticketing</title>
+  <link rel="stylesheet" href="/app.css">
+  <script defer src="/app.js"></script>
+</head>
+
+<body>
+  <header class="masthead">
+    <div class="page mast-inner">
+      <h1>310 Ticketing</h1>
+    </div>
+  </header>
+  <main class="page">
+    <section id="event-search" class="card search-card">
+      <div class="card-heading landing-heading">
+        <h2>Find an event</h2>
+        <button id="open-scanner" class="button secondary" type="button">Scan a ticket</button>
+      </div>
+      <form id="event-form" class="find-form" role="search">
+        <label for="event">Event name</label>
+        <div class="search-input-row">
+          <input id="event" name="event" type="search" placeholder="Search by name or event ID" maxlength="120"
+            required>
+          <button class="button primary" type="submit">Search</button>
+        </div>
+      </form>
+      <p id="event-search-status" role="status"></p>
+      <ul id="event-results" class="event-results" aria-label="Matching events"></ul>
+    </section>
+    <div id="event-workspace" hidden>
+      <button id="back-to-search" class="button secondary back-to-search" type="button">Find another event</button>
+      <nav class="nav" aria-label="Demo views">
+        <button type="button" data-panel="buy" aria-pressed="true">Buy tickets</button>
+        <button type="button" data-panel="scan" aria-pressed="false">Scan ticket</button>
+        <button type="button" data-panel="stats" aria-pressed="false">Event stats</button>
+      </nav>
+
+      <section id="buy" class="buy-grid">
+        <div class="card">
+          <div class="card-heading">
+            <div>
+              <h2 id="event-title" tabindex="-1">Seat map</h2>
+              <p id="event-schedule"></p>
+              <p id="seat-summary" role="status">Loading event…</p>
+            </div>
+            <button type="button" id="refresh-seats" class="button secondary">Refresh seats</button>
+          </div>
+          <div class="stage">Stage</div>
+          <div class="seat-scroll">
+            <div id="seat-map" aria-label="Seats by row"></div>
+          </div>
+          <ul class="legend" aria-label="Seat states">
+            <li><span class="swatch available"></span>Available</li>
+            <li><span class="swatch held"></span>Held</li>
+            <li><span class="swatch sold"></span>Sold</li>
+            <li><span class="swatch preview"></span>Preview</li>
+            <li><span class="swatch own"></span>Your hold</li>
+          </ul>
+        </div>
+        <div class="card checkout">
+          <h2>Checkout</h2>
+          <form id="hold-form">
+            <label for="party-size">Tickets</label>
+            <select id="party-size">
+              <option>1</option>
+              <option selected>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+            <button id="hold-button" class="button primary" type="submit">Show best seats</button>
+          </form>
+          <p id="hold-help">Preview seats first. A 30-second hold starts when you confirm.</p>
+          <div id="seat-options" hidden>
+            <p id="option-label" role="status"></p>
+            <div id="option-navigation" class="option-nav">
+              <button id="previous-option" class="button secondary" type="button">Previous option</button>
+              <button id="next-option" class="button secondary" type="button">Next option</button>
+            </div>
+            <button id="hold-option" class="button primary" type="button">Hold these seats</button>
+          </div>
+          <div id="hold-details" hidden>
+            <div class="hold-line"><strong id="held-seats"></strong><span id="countdown"></span></div>
+            <div id="receipt-field" hidden>
+              <label for="receipt-email">Confirmation email (optional)</label>
+              <input id="receipt-email" type="email" autocomplete="email" maxlength="254">
+              <p>Use your verified demo address to receive an order confirmation and calendar file.</p>
+            </div>
+            <button id="checkout-button" class="button primary" type="button">Submit checkout</button>
+          </div>
+          <p id="checkout-status" class="status" role="status" hidden></p>
+          <button id="resume-order" class="button secondary" type="button" hidden>Check order again</button>
+          <button id="next-order" class="button secondary" type="button" hidden>Start another order</button>
+          <ul id="tickets" class="tickets" hidden></ul>
+        </div>
+      </section>
+
+      <section id="stats" class="card" hidden>
+        <div class="card-heading">
+          <div>
+            <h2>Event stats</h2>
+            <p id="stats-status" role="status"></p>
+          </div>
+          <button id="refresh-stats" class="button secondary" type="button">Refresh stats</button>
+        </div>
+        <dl id="stats-values" class="stats"></dl>
+        <p id="double-booked"></p>
+      </section>
+    </div>
+    <section id="scan" class="card single-card scanner-card" hidden>
+      <div class="card-heading">
+        <h2>Scan a ticket</h2>
+        <button id="scan-back-to-search" class="button secondary" type="button" hidden>Back to search</button>
+      </div>
+      <form id="scan-form">
+        <label for="ticket-code">Ticket code</label>
+        <textarea id="ticket-code" rows="3" required spellcheck="false"></textarea>
+        <p class="scan-help">A successful scan marks the ticket as used.</p>
+        <label for="gate">Gate</label>
+        <input id="gate" value="north" maxlength="40" required>
+        <button class="button primary" type="submit">Scan ticket</button>
+      </form>
+      <p id="scan-status" class="status" role="status" hidden></p>
+    </section>
+  </main>
+</body>
+
+</html>

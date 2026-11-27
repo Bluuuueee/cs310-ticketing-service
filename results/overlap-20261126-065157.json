@@ -1,0 +1,102 @@
+{
+  "started_at_utc": "2026-11-26T12:53:42.497653+00:00",
+  "scenario": "overlap",
+  "party_size": 2,
+  "concurrency": 2,
+  "buyers_per_event": 1,
+  "poll_timeout_seconds": 85,
+  "results": [
+    {
+      "event": "overlap-correct-20261126-065157",
+      "mode": "correct",
+      "hold_attempts": 1,
+      "successful_holds": 1,
+      "checkout_attempts": 2,
+      "accepted_checkouts": 2,
+      "orders_observed": {
+        "confirmed": 1,
+        "failed": 1,
+        "unresolved": 0,
+        "failure_reasons": {
+          "hold_expired": 1
+        }
+      },
+      "http_errors": {},
+      "latency_ms": {
+        "hold": {
+          "requests": 1,
+          "p50": 188.0,
+          "p95": 188.0
+        },
+        "checkout": {
+          "requests": 2,
+          "p50": 219.0,
+          "p95": 219.0
+        }
+      },
+      "stats": {
+        "event_id": "overlap-correct-20261126-065157",
+        "capacity": 50,
+        "available": 48,
+        "held": 0,
+        "sold": 2,
+        "tickets_issued": 2,
+        "double_booked_seats": [],
+        "conflicts": 0,
+        "orders": {
+          "pending": 0,
+          "confirmed": 1,
+          "failed": 1
+        }
+      },
+      "elapsed_seconds": 5.11
+    },
+    {
+      "event": "overlap-naive-20261126-065157",
+      "mode": "naive",
+      "hold_attempts": 1,
+      "successful_holds": 1,
+      "checkout_attempts": 2,
+      "accepted_checkouts": 2,
+      "orders_observed": {
+        "confirmed": 2,
+        "failed": 0,
+        "unresolved": 0,
+        "failure_reasons": {}
+      },
+      "http_errors": {},
+      "latency_ms": {
+        "hold": {
+          "requests": 1,
+          "p50": 187.0,
+          "p95": 187.0
+        },
+        "checkout": {
+          "requests": 2,
+          "p50": 203.0,
+          "p95": 203.0
+        }
+      },
+      "stats": {
+        "event_id": "overlap-naive-20261126-065157",
+        "capacity": 50,
+        "available": 48,
+        "held": 0,
+        "sold": 2,
+        "tickets_issued": 4,
+        "double_booked_seats": [
+          "A-5",
+          "A-6"
+        ],
+        "conflicts": 0,
+        "orders": {
+          "pending": 0,
+          "confirmed": 2,
+          "failed": 0
+        }
+      },
+      "elapsed_seconds": 5.06
+    }
+  ],
+  "verdict": "OBSERVED: the same hold sold twice in naive mode and once in correct mode."
+}
